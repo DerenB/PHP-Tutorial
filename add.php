@@ -9,10 +9,29 @@
     // }
 
     if(isset($_POST['submit'])) {
-        echo $_POST['email'];
-        echo $_POST['title'];
-        echo $_POST['ingredients'];
-    }
+
+        // Check Email submission
+        if(empty($_POST['email'])) {
+            echo 'An email is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['email']);
+        }
+
+        // Check Title submission
+        if(empty($_POST['title'])) {
+            echo 'A title is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['title']);
+        }
+
+        // Check Ingredients submission
+        if(empty($_POST['ingredients'])) {
+            echo 'An email is required <br />';
+        } else {
+            echo htmlspecialchars($_POST['ingredients']);
+        }
+        
+    } // End of POST check
 
 
 ?>
