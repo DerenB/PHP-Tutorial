@@ -57,6 +57,16 @@
             }
         }
 
+        // Check if there are any errors
+        // If there are no errors in the array, it will return False
+        if(array_filter($errors)) {
+            echo 'Errors in the form';
+        } else {
+            // echo 'Form is Valid';
+            // Redirect user to given page
+            header('Location: index.php');
+        }
+
     } // End of POST check
 
 
