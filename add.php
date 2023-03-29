@@ -1,5 +1,4 @@
 <?php
-
     // Example of GET
     // Checks if a certain variable/value has been set
     // Form stores all variables in a GET variable, associative array
@@ -8,6 +7,9 @@
     //     echo $_GET['title'];
     //     echo $_GET['ingredients'];
     // }
+
+    // Database Connection
+    include('config/db_connect.php');
 
     // Initialize Variables
     $email = $title = $ingredients = '';
@@ -63,8 +65,24 @@
             echo 'Errors in the form';
         } else {
             // echo 'Form is Valid';
-            // Redirect user to given page
-            header('Location: index.php');
+
+            // Add data to database
+            $email = mysqli_real_escape_string($connection, $_POST['email']);
+            $title = mysqli_real_escape_string($connection, $_POST['title']);
+            $ingredients = mysqli_real_escape_string($connection, $_POST['ingredients']);
+
+            // Create SQL insert statement
+            $sqlInsert = "INSERT INTO pizzas(title, email, ingredients) VALUES('$title', '$email', '$ingredients')";
+
+            // Save to Database and check
+            if(mysqli_query($connection, $sqlInsert)) {
+                // Success
+                // Redirect user to given page
+                header('Location: index.php');
+            } else {
+                // Error
+                echo 'Query Error: ' . mysqli_error($connection);
+            }
         }
 
     } // End of POST check
