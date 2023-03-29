@@ -10,7 +10,7 @@
     }
 
     // Query to retrieve ALL pizzas
-    $sqlQueryAll = 'SELECT title, ingredients, id FROM pizzas';
+    $sqlQueryAll = 'SELECT title, ingredients, id FROM pizzas ORDER BY created_at';
 
     // Execute Query, get result
     $result = mysqli_query($connection, $sqlQueryAll);
@@ -26,7 +26,7 @@
     mysqli_close($connection);
 
     // Test print
-    print_r($pizzaResults);
+    // print_r($pizzaResults);
 
 ?>
 
@@ -34,6 +34,29 @@
 <html lang="en">
 
     <?php include('templates/header.php') ?>
+
+    <h4 class="center grey-text">Pizzas!</h4>
+
+    <div class="container">
+        <div class="row">
+
+            <?php foreach($pizzaResults as $pizza) { ?>
+
+                <div class="col s6 m3">
+                    <div class="card z-depth-0">
+                        <div class="card-content center">
+                            <h6><?php echo htmlspecialchars($pizza['title']); ?></h6>
+                            <div><?php echo htmlspecialchars($pizza['ingredients']); ?></div>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="brand-text" href="#">More Info</a>
+                        </div>
+                    </div>
+                </div>
+
+            <?php } ?>
+        </div>
+    </div>
 
     <?php include('templates/footer.php') ?>
     
