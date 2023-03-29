@@ -9,6 +9,25 @@
         echo 'Connection Error: ' . mysqli_connect_error();
     }
 
+    // Query to retrieve ALL pizzas
+    $sqlQueryAll = 'SELECT title, ingredients, id FROM pizzas';
+
+    // Execute Query, get result
+    $result = mysqli_query($connection, $sqlQueryAll);
+
+    // Fetch the result rows as an array
+    $pizzaResults = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Free the result from memory
+    // Not necessary but good practice
+    mysqli_free_result($result);
+
+    // Close connection to database
+    mysqli_close($connection);
+
+    // Test print
+    print_r($pizzaResults);
+
 ?>
 
 <!DOCTYPE html>
